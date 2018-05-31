@@ -2,15 +2,16 @@ body {
     text-align: center;
 }
 
-.box {
-    height: 50px;
-    width: 50px;
+.bottle {
     display: inline-block;
     margin: 2px;
-    border: solid 1px black;
+}
+
+.bottle img {
+    height: 50px;
 }
 
 .mixer img {
-    height: 150px;
+    height: 100px;
     background-color: rgb(107,192,221);
 }

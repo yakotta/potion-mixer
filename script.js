@@ -11,7 +11,7 @@ $(document).ready(function(){
         black: [0,0,0] // #000000
     }
     
-    // turns array into rgb(x,y,z) form
+    // turns an array into rgb(x,y,z) form
     function rgbify(arr){
         return 'rgb(' + arr.join() + ')';
     }
@@ -20,20 +20,22 @@ $(document).ready(function(){
     for (var key in colors){
         if (colors.hasOwnProperty(key)) {
             var rgb = rgbify(colors[key]);
-            var box = $('<div>');
-            box.attr('id', key);
-            box.attr('style', 'background-color: ' + rgb);
-            box.addClass('box');
-            $('#color-palette').append(box);
+            var bottle = $('<div>')
+            bottle.attr('id', key);
+            bottle.addClass('bottle');
+            bottle.html('<img>');
+            bottle.children().attr('src', 'potion.png');
+            bottle.children().attr('style', 'background-color: ' + rgb);
+            $('#color-palette').append(bottle);
         }
     }
         
     // locates the mixer box
-    var mixerBox = $('.mixer img');
+    var mixerBottle = $('.mixer img');
     
-    // get rgb color of mixer box
+    // gets the rgb color of mixer box
     function getColors(){
-        var rgb = mixerBox.attr('style').replace('background-color: rgb(', '').replace(')', '').split(',');
+        var rgb = mixerBottle.attr('style').replace('background-color: rgb(', '').replace(')', '').split(',');
         return rgb.map(x => parseInt(x));
     }
     
@@ -48,16 +50,15 @@ $(document).ready(function(){
     }
     
     // gets the color from the clicked box
-    $('.box').click(function(){
+    $('.bottle').click(function(){
         var clickedColor = $(this).attr('id');
-        if(mixerBox[0].hasAttribute('style')){
+        if(mixerBottle.hasClass('empty')) {
+            mixerBottle.attr('style', 'background-color: ' + rgbify(colors[clickedColor]));
+            mixerBottle.removeClass('empty');
+        } else {
             var mixedColor = getColors();
             var newColor = blendColors(mixedColor, clickedColor);
-            mixerBox.attr('style', 'background-color: ' + rgbify(newColor));
-            
-        }
-        else {
-            mixerBox.attr('style', 'background-color: ' + rgbify(colors[clickedColor]));
+            mixerBottle.attr('style', 'background-color: ' + rgbify(newColor));
         }
     });
 });
