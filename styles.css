@@ -10,11 +10,7 @@ body {
     border: solid 1px black;
 }
 
-#mixer-box {
+.mixer img {
     height: 150px;
-    width: 150px;
-    border: solid 1px black;
-    margin-top: 10px;
-    display: inline-block;
-    
+    background-color: rgb(107,192,221);
 }

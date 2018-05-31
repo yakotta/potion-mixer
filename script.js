@@ -29,7 +29,7 @@ $(document).ready(function(){
     }
         
     // locates the mixer box
-    var mixerBox = $('#mixer-box');
+    var mixerBox = $('.mixer img');
     
     // get rgb color of mixer box
     function getColors(){
