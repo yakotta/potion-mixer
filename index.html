@@ -5,11 +5,30 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     <body>
-        <div class="mixer">
-            <img src="potion.png" class="empty" />
+        <div id="intro">
+            <img src= "witch-hat.png" />
+            <p>hey there, little witch!</p>
+            <p>what potion are you mixing up today?</p>
+            <p><ul>
+                <li>love</li>
+                <li>health</li>
+                <li>happiness</li>
+                <li>luck</li>
+                <li>pleasure</li>
+                <li>money</li>
+                <li>misfortune</li>
+                <li>death</li>
+            </ul></p>
         </div>
-        
-        <div id="color-palette"></div>
+        <div id="game" class="hidden">
+            <div class="mixer">
+                <img src="potion.png" id="endpoint" />
+                <img src="potion.png" id="mixing" class="empty" />
+            </div>
+            
+            <div id="color-palette"></div>
+            <button id="reset">hmm, that doesn't look right...</button>
+        </div>
         
         <script src="script.js"></script>
     </body>

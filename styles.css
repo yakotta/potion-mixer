@@ -9,9 +9,27 @@ body {
 
 .bottle img {
     height: 50px;
+    cursor: pointer;
 }
 
 .mixer img {
     height: 100px;
-    background-color: rgb(107,192,221);
+    background-color: rgb(169,213,224);
+}
+
+.hidden {
+    display: none;
+}
+
+#intro img {
+    height: 60px;
+}
+
+li {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+button {
+    cursor: pointer;
 }
