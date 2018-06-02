@@ -1,26 +1,26 @@
 $(document).ready(function(){
     // provides the starting color in [r,g,b]
     var colors = {
-        magenta: [236,0,140],
+        magenta: [255,0,255],
         red: [255,0,0],
-        yellow: [255,242,0],
+        yellow: [255,255,0],
         green: [0,255,0],
         blue: [0,0,255],
-        cyan:[0,174,239],
+        cyan:[0,255,255],
         white: [255,255,255],
         black: [0,0,0]
     }
     
     // provides the goal colors in [r,g,b]
     var endpoints = {
-        love: [230,16,79],
-        health: [5,158,227],
-        happiness: [255,213,24],
-        luck: [152,227,80],
-        pleasure: [250,98,10],
-        money: [8,98,34],
-        misfortune: [182,0,3],
-        death: [71,11,88] // 71,11,88???
+        love: [250, 20, 85],
+        health: [33, 151, 220],
+        happiness: [255, 224, 48],
+        luck: [148, 223, 10],
+        pleasure: [247, 93, 2],
+        money: [40, 110, 18],
+        misfortune: [167, 16, 18],
+        death: [77, 1, 85]
     }
     
     // turns an array into rgb(x,y,z) form
@@ -96,16 +96,16 @@ $(document).ready(function(){
         console.log(checkColor)
         var check = [];
         for (i = 0; i < 3; i++){
-            check[i] = goalColor[i]-2 <= checkColor[i] && checkColor[i] <= goalColor[i]+2;
+            check[i] = goalColor[i]-4 <= checkColor[i] && checkColor[i] <= goalColor[i]+4;
         }
         console.log(check);
         console.log(check.filter(x => x).length);
         if(check.filter(x => x).length == 3) {
-            alert('success!');
+            console.log('success!');
         } else if (check.filter(x => x).length ==2) {
-            alert('soooooo close!');
+            console.log('soooooo close!');
         } else if (check.filter(x => x).length == 1) {
-            alert('getting there!');
+            console.log('getting there!');
         }
     }
     
