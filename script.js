@@ -149,4 +149,13 @@ $(document).ready(function(){
         changeColor(mixerBottle, rgbify[169,213,224]);
         mixerBottle.addClass('empty');
     });
+    
+    $('#replay').click(function(){
+        $('#game').addClass('hidden');
+        $('#control-panel').removeClass('hidden');
+        $('#winner').addClass('hidden');
+        $('#intro').removeClass('hidden');
+        changeColor(mixerBottle, rgbify[169,213,224]);
+        mixerBottle.addClass('empty');
+    });
 });
