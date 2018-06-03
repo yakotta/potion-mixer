@@ -90,38 +90,6 @@ $(document).ready(function(){
         }
     });
     
-    // looks to see if the player won
-    function isThatAWin(checkColor){
-        var hslGoal = rgb2hsl(...goalColor);
-        var hslCheck = rgb2hsl(...checkColor);
-        console.log("goal: " + hslGoal.join(" "));
-        console.log("check: " + hslCheck.join(" "));
-        var check = [];
-        
-        for (i = 0; i < 3; i++){
-            if (i = 1) {
-                check[i] = hslGoal[i] + 5 <= hslCheck[i] && hslCheck[i] <= hslGoal[i] + 5;
-            } else {
-                check[i] = hslGoal[i] - .05 <= hslCheck[i] && hslCheck[i] <= hslGoal[i] + .05;
-            }
-        }
-        console.log(check);
-        //console.log(check.filter(x => x).length);
-        /*if(check.filter(x => x).length == 3) {
-            console.log('success!');
-        } else if (check.filter(x => x).length ==2) {
-            console.log('soooooo close!');
-        } else if (check.filter(x => x).length == 1) {
-            console.log('getting there!');
-        }*/
-    }
-    
-    // allows the player to reset the mixer bottle
-    $('#reset').click(function(){
-        changeColor(mixerBottle, rgbify[169,213,224]);
-        mixerBottle.addClass('empty');
-    });
-    
     //converts rgb colors to hsl
     function rgb2hsl(r, g, b) {
         // https://www.rapidtables.com/convert/color/rgb-to-hsl.html
@@ -157,33 +125,28 @@ $(document).ready(function(){
         return hsl.map(x => parseFloat(x.toFixed(2)));
     }
     
-    //converts hsl colors to rgb
-    function hsl2rgb(h, s, l){
-        // https://www.rapidtables.com/convert/color/hsl-to-rgb.html
-        var rgb = [];
-        var c = (1 - Math.abs(2*l - 1)) * s;
-        var x = c * (1 - Math.abs(((h/60) % 2) - 1));
-        var m = l - c/2;
+    // looks to see if the player won
+    function isThatAWin(checkColor){
+        var hslGoal = rgb2hsl(...goalColor);
+        var hslCheck = rgb2hsl(...checkColor);
+        var check = [];
         
-        if(0 <= h && h < 60){
-            rgb = [c, x, 0];
-        } else if(60 <= h && h < 120) {
-            rgb = [x, c, 0];
-        } else if(120 <= h && h < 180){
-            rgb = [0, c, x];
-        } else if(180 <= h && h < 240){
-            rgb = [0, x, c];
-        } else if(240 <= h && h < 300){
-            rgb = [x, 0, c];
-        } else if(300 <= h && h < 360){
-            rgb = [c, 0, x];
+        function checkPush(i, tolerance) {
+            check.push(hslGoal[i] - tolerance <= hslCheck[i] && hslCheck[i] <= hslGoal[i] + tolerance);
         }
-        
-        return rgb.map(x => Math.round(255 * (x + m)));
+        checkPush(0, 5);
+        checkPush(1, .05);
+        checkPush(2, .05)
+
+        if (check.filter(x => x).length == 3) {
+            $('#control-panel').addClass('hidden');
+            $('#winner').removeClass('hidden');
+        };
     }
     
-    // turns h,s,l into hsl(x,y%,z%)
-    function hslify(h, s, l){
-        return 'hsl(' + h + ',' + s*100 + '%,' + l*100 + '%)';
-    }
+    // allows the player to reset the mixer bottle
+    $('#reset').click(function(){
+        changeColor(mixerBottle, rgbify[169,213,224]);
+        mixerBottle.addClass('empty');
+    });
 });
